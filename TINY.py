@@ -2,9 +2,8 @@
 #encoding: utf-8
  
         
-''' Modulo che consente di Leggere e Scrivere
-su TINY_RTC ovvero DS1307 sia nella parte Calendario 
-che nella RAM libera che parte da indirizzo 0x08 fino a 0x3F
+'''Te module it allows you to Read and Write
+of TINY RTC break-board 
 '''
         
 import time   
@@ -107,15 +106,15 @@ class RTC():
             
 # funzioni 'PUBBLIC'		
 	def getSec(self):
-		'''Return Secondi di RTC'''
+		'''Return Seconds in RTC'''
 		return  self.__bcdToDec(self.__read(self.__REG_SECONDS))
 		
 	def getMin(self):
-		'''Return Minuti di RTC'''
+		'''Return Minuts in RTC'''
 		return self.__bcdToDec(self.__read(self.__REG_MINUTES))
 
 	def getHour(self):
-		''' Return Ora attuale in formato 24h'''
+		''' Return hours in format 24h'''
 		d = self.__read(self.__REG_HOURS)
 		if d & 0x40:#x1xx xxxx  modo 24 ore
 			return self.__bcdToDec(d & 0x3F)
@@ -150,15 +149,15 @@ class RTC():
 	        self.getMin(), self.getSec(), 0, tzinfo=tzinfo)
 	        
 	def write_datetime(self, dt):
-			"""Riceve dt = datetime.datetime object.
-			lo scrive in RTC
+			"""Receives dt = datetime.datetime object.
+			and writes it in RTC
 			"""
 			self.__write_all(dt.second, dt.minute, dt.hour,
 			dt.isoweekday(), dt.day, dt.month, dt.year % 100)
 		
 	def write_now(self):
-			"""Aggiorna la Data di RTC leggendola 
-			da orologio di SoC
+			"""Updates the date RTC reading it
+			by SoC clock
 			"""
 			self.write_datetime(datetime.now())
 
@@ -169,7 +168,7 @@ class RTC():
 
 # Funzioni di accesso alla RAM libera
 	def write_ram(self, reg=__REG_RAM, data=0):
-		''' Scrive un byte nella Ram di RTC a registro reg
+		'''Write a byte in RTC Ram register at address reg
 		'''
 		if (reg>=self.__REG_RAM  and reg <=self.__MAX_RAM): 
 			self.__write(reg, data)
@@ -177,7 +176,7 @@ class RTC():
 			raise ValueError(msg_ram_1+str(reg))
 			
 	def read_ram_n(self,reg=__REG_RAM,n=1):
-		''' Commento '''
+		''' Return n bytes at address reg '''
 		L=[]
 		if (reg>=self.__REG_RAM  and reg+n-1<=self.__MAX_RAM): 
 			for i in range(reg,reg+n):
@@ -188,7 +187,7 @@ class RTC():
 		return L
 		
 	def read_ram(self,reg=__REG_RAM):
-		'''Return un byte di RAM di indirizzo reg'''
+		'''Return a byte at address reg'''
 		if (reg>=self.__REG_RAM  and reg <=self.__MAX_RAM): 
 			return self.__read(reg)
 		else:
@@ -261,7 +260,7 @@ class TEMP:
 		''' Return: state<0, =0, >0 
 		ES. se lo<temp<hi return 0
 		    se temp<lo return valore negativo gradi in meo di lo
-		    se temp>hi return volore positivo gradi in più di hi '''
+		    se temp>hi return volore positivo gradi in piÃ¹ di hi '''
 		return self._alarm		 
 
 			
@@ -289,7 +288,7 @@ class TEMP:
 		''' Legge ela temperatura del dispositivo 
 		Riceive: disp=dispositivo che restituisce la temperatura
 		test se=True ri-verifica la lista dei sipositivi ancora connessi 
-		dall'avvio. Consente di inserire togliere disp�ositivi
+		dall'avvio. Consente di inserire togliere dispÃositivi
 		durante l'esecuzione. Se=False usa i dipositivi registrati 
 		all'avvio da errore se dispositivi rimossi in esecuzione. 
         	Return: la Temperatura misurate in Celsius
@@ -345,7 +344,7 @@ class EPROM():
         def set_byte(self,reg,val):
 		''' Scrive il byte val alla posizione reg della EEPROM 
 		Param: reg=0..4095 e val=0..255 un byte numerico
-		Return: True or False se la scrittura è andata in porto'''
+		Return: True or False se la scrittura Ã¨ andata in porto'''
                 if (reg>=self.__MIN_ADDR  and reg<=self.__MAX_ADDR):
                         tu=self.__get_addr(reg)
                         self._bus.write_i2c_block_data(self._addr, tu[0],[tu[1],val])
@@ -372,7 +371,7 @@ class EPROM():
         def set_str(self, reg, val):
 		''' Scrive la stringa val a partire dal registro reg
 		Param: reg=0..4095 registro di inizio val= stringa da scrivere
-		Return: True or False se la scrittura è andata in porto'''
+		Return: True or False se la scrittura Ã¨ andata in porto'''
 		l=0
 		L_car=[]
                 if type(val)==str:
