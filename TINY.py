@@ -297,7 +297,9 @@ class TEMP:
 				
 		return Temp
 
-# ========= Classe EPROM ==============================
+# ========= Class EPROM ==============================
+''' It allows read/write access to the EPROM AT24C32 on TINY '''
+
 msg_EPROM_1='addr EPROM (0-4095) out of range. Used REF is :'	
 
 class EPROM():
@@ -316,9 +318,10 @@ class EPROM():
 
 
 	def get_byte(self,reg):
-		''' Legge in Byte di posizione reg della EEPROM 
-		Param:  reg=0 .. 4095 indirizzo su cui leggere
-		Return: il byte in EEPROM di posizione reg '''
+		''' Reads a byte at position reg in EEPROM
+		Receive: reg = 0 .. 4095 address
+		Return: the byte in this position'''
+		
 		if (reg>=self.__MIN_ADDR  and reg<=self.__MAX_ADDR):
 			tu=self.__get_addr(reg)
 	 		self._bus.write_i2c_block_data(self._addr, tu[0],[tu[1]])
@@ -328,9 +331,9 @@ class EPROM():
 
 
         def set_byte(self,reg,val):
-		''' Scrive il byte val alla posizione reg della EEPROM 
-		Param: reg=0..4095 e val=0..255 un byte numerico
-		Return: True or False se la scrittura Ã¨ andata in porto'''
+		''' Writes the byte val at address reg
+		Receive: reg = addr (0..4095) and  val=0..255 (byte value)
+		Return: True or False if the writing is ok'''
                 if (reg>=self.__MIN_ADDR  and reg<=self.__MAX_ADDR):
                         tu=self.__get_addr(reg)
                         self._bus.write_i2c_block_data(self._addr, tu[0],[tu[1],val])
@@ -341,9 +344,9 @@ class EPROM():
 			return False
 		
         def get_str(self,reg,dim):
-		''' Legge una stringa di dimensione dim a partire dal registo reg
-		Param: reg=0..4095 registro da cui inizia, dim= num caratteri da leggere
-		Return: La stringa di dimensione dim '''
+		'''Read a string of length dim from register reg 
+		Receive: reg = 0..4095 address of start, dim = num characters to read 
+		Return: The string of length dim '''
 		Ris=""
                 if (reg>=self.__MIN_ADDR  and (reg+dim-1)<=self.__MAX_ADDR):
                        	tu=self.__get_addr(reg)
@@ -355,9 +358,10 @@ class EPROM():
 		return Ris
 
         def set_str(self, reg, val):
-		''' Scrive la stringa val a partire dal registro reg
-		Param: reg=0..4095 registro di inizio val= stringa da scrivere
-		Return: True or False se la scrittura Ã¨ andata in porto'''
+		'''Write the string val start from address reg
+		Receive: reg = 0..4095 start register and val = string to write
+		Return: True or False if the writing is ok'''
+		
 		l=0
 		L_car=[]
                 if type(val)==str:
