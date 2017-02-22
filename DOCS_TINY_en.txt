@@ -1,4 +1,4 @@
-Abstract: TINY RTC and 'a break-out-board containing
+Abstract: TINY RTC is a break-out-board containing
 1) A RealTimeClock DS1307 (I2C protocol)
 2) An EPROM AT24C32 of 4096 bytes (I2C protocol)
 3) The ability to weld a temperature sensor DS18B20 (OneWire protocol pin DS)
@@ -20,7 +20,7 @@ bool 		<- ds.rtc_work()
 void 		<- ds.write_now()
 void 		<- ds.write_datetime(time)
 touple 	<- ds.read_tupleDate()
-str    		<- ds.read_strDate()
+str    	<- ds.read_strDate()
 datetime 	<- ds.read_objDate()
 
 # Keyword to access free RAM  in RTC
