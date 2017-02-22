@@ -195,27 +195,21 @@ class RTC():
 			
 # ======    Classe TEMP =====================
 
-''' Testato su CHIP e Raspberry. Lavora su Sensori
-OneWire sia montati sy Tiny RTC che autonomi.
-Consente attacco/distacco di sensori in parallelo
-anche durante il funzionamento '''
+''' Work on Sensors OneWire (tipical DS18B20) is mounted on Tiny RTC that autonomous.
+Allows attachment/detachment of sensors during operation'''
 
 
 class TEMP:
 	# funzioni 'PRIVATE'	
 
 	def __temp_raw(self, mio_file):
-		''' legge una linea di testo dal file '/sys/../28-xxxxxxx/w1_slave
-		che contiene 2 linee di testo con i valori dei registri del sensore
-		che saranno usati per leggere lo stato e la temperatura
-		'''
 		f=open(mio_file, 'r')
 		lines=f.readlines()
 		f.close()
 		return lines
 
 	def __get_enabled(self):
-		''' Ricostruisce la lista dei sensori attivi '''
+		''' Reconstructs the list of active sensors '''
 		i=0
 		self._dev_file=[]
 		while True:
@@ -242,34 +236,30 @@ class TEMP:
 
 # Funzioni 'PUBBLIC'	
 	def set_alarm(self, lo, hi,disp):
-		''' setta gli estremi di temperatura di allarme 
-		Riceve: lo, hi estremi allarme, disp il 
-		dispositivo a cui si riferiscono
-		Return: void '''
+		''' sets the alarm temperature extremes.
+		Receives: lo, hi extreme alarm, the disp=devices identifier'''
 		if lo<=hi:
 			self._lo=lo
 			self._hi=hi
 
 	def get_alarm_val(self,disp):
-		''' legge gli estremi di temperatura di allarme fissati 
-		Riceve: disp il	dispositivo a cui si riferiscono
-		Return: List dei due valori '''
+		'''Reads the alarm temperature extremes fixed
+		Receives:  disp=devices identifier
+		Return: List of the two values '''
 		return [self._lo, self._hi]
 
 	def get_alarm_state(self):
 		''' Return: state<0, =0, >0 
-		ES. se lo<temp<hi return 0
-		    se temp<lo return valore negativo gradi in meo di lo
-		    se temp>hi return volore positivo gradi in piÃ¹ di hi '''
+		ES. if lo<temp<hi return 0
+		    if temp<lo return negative value in degree
+		    if temp>hi return positive value in degree '''
 		return self._alarm		 
 
 			
 
 	def exist_disp(self):
-		'''Verifica se ci sono dispositivi connessi al bus One Wire 
-		testato per C.H.I.P. and RaspberryPi
-		Return: True or False
-		'''
+		'''Check if there are devices connected to the One Wire bus
+		Return: True or False'''
 		if self._dev_file==[]:
 			return False
 		else:
@@ -277,22 +267,18 @@ class TEMP:
 			
 	
 	def get_disp(self):
-		''' verifica i dispositivi conneessi al BUS OneWire
-		testata per C.H.I.P. and RaspberryPi
-		Return: Lista dei dispositivi connessi
-		'''
+		''' Testing connected devices to the BUS OneWire 
+		Return: List of connected devices'''
 		return self._dev_file
 	
 			
 	def read_temp(self,disp,test=True):
-		''' Legge ela temperatura del dispositivo 
-		Riceive: disp=dispositivo che restituisce la temperatura
-		test se=True ri-verifica la lista dei sipositivi ancora connessi 
-		dall'avvio. Consente di inserire togliere dispÃositivi
-		durante l'esecuzione. Se=False usa i dipositivi registrati 
-		all'avvio da errore se dispositivi rimossi in esecuzione. 
-        	Return: la Temperatura misurate in Celsius
-        	'''
+		''' Reads the temperature of the device
+		Riceive: disp = device that returns the temperature
+		if test = True re-checks the list of devices still connected. 
+		It allows you to insert/remove devices (DS18B20) while running. 
+		If test = False uses devices registered at Startup.
+		Return: the temperature measured in Celsius '''
 		if test: self.__get_enabled()
 		Temp=0.0
 		#self._alarm=0
