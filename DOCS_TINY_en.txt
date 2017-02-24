@@ -1,0 +1,59 @@
+Abstract: TINY RTC is a break-out-board containing
+1) A RealTimeClock DS1307 (I2C protocol)
+2) An EPROM AT24C32 of 4096 bytes (I2C protocol)
+3) The ability to weld a temperature sensor DS18B20 (OneWire protocol pin DS)
+
+The classes in TINY.py allow you to access the different integrated TINY for their management.
+Here is a rough list of usable Keyword:
+
+============  CLASS RTC (ds1307)  ============================
+#Library
+from TINY import RTC
+from datetime import datetime
+import os
+
+#initialize
+ds=RTC()
+
+#Keyword to access RTC Calendar
+bool 		<- ds.rtc_work()
+void 		<- ds.write_now()
+void 		<- ds.write_datetime(time)
+touple 	<- ds.read_tupleDate()
+str    	<- ds.read_strDate()
+datetime 	<- ds.read_objDate()
+
+# Keyword to access free RAM  in RTC
+byte		<- ds.read_ram(addr)
+list of byte	<- ds.read_ram_n(addr, num)
+void		<- ds.write_ram(addr, data)
+
+=============== CLASS EPROM (AT24C32) =============================
+#Library
+from TINY import EPROM
+
+#initialize
+ds=EPROM()
+
+# Keyword to access EPROM
+void		<- ds.set_byte(addr,data)
+void 		<- ds.set_str(addr,str)
+byte		<- ds.get_byte(addr)
+str		<- ds.get_str(addr,len)
+
+=================  CLASS TEMP (DS18B20 or 1822) =====================
+NOTE: DS18B20 must be welded on TINY [accessed to SD PIN]
+       or you can use One or More 'cascade' Sensors
+       with OneWire connection.
+       
+#Library
+from TINY import TEMP
+
+#initialize
+ds=TEMP()
+
+# Keyword
+bool 		<- ds.exist_disp()
+List		<- ds.get_disp()
+float		<- ds.read_temp(disp)
+
