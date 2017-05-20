@@ -2,6 +2,7 @@
 python modules to manage the board TINY RTC
 
 TINY.py is a python module to handle all of TINY RTC devices.
+TINY_1.py is e new module width little modify
 
 In particular, it manages via I2C:
 
