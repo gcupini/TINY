@@ -1,4 +1,4 @@
-
+''' worl anly width LCD 4x20'''
 import CHIP_IO.GPIO as GPIO
 import time
 
@@ -43,8 +43,7 @@ def lcd_init(a_RS,a_E,a_D4,a_D5,a_D6,a_D7,a_Back):
 #  GPIO.toggle_debug()
   GPIO.setmode(GPIO.BOARD)
   GPIO.setwarnings(False)
-#  print "OOO"
-#  while(1):continue
+
   # Main program block
   GPIO.setup(LCD_RS, GPIO.OUT) # RS 
   GPIO.setup(LCD_E, GPIO.OUT)  # E
