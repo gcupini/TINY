@@ -40,6 +40,11 @@ def lcd_init(a_RS,a_E,a_D4,a_D5,a_D6,a_D7,a_Back):
   LCD_D6=a_D6
   LCD_D7=a_D7
   LCD_Back=a_Back
+#  GPIO.toggle_debug()
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setwarnings(False)
+#  print "OOO"
+#  while(1):continue
   # Main program block
   GPIO.setup(LCD_RS, GPIO.OUT) # RS 
   GPIO.setup(LCD_E, GPIO.OUT)  # E
@@ -135,3 +140,5 @@ def lcd_backlight(flag):
 def lcd_clear():
 	lcd_byte(0x01, False)
 
+def lcd_stop():
+	GPIO.cleanup()
