@@ -41,7 +41,7 @@ void 		<- ds.set_str(addr,str)
 byte		<- ds.get_byte(addr)
 str		<- ds.get_str(addr,len)
 
-=================  CLASS TEMP (DS18B20 or 1822) =====================
+=================  CLASS TEMP (DS18B20 or 18B22) =====================
 NOTE: DS18B20 must be welded on TINY [accessed to SD PIN]
        or you can use One or More 'cascade' Sensors
        with OneWire connection.
@@ -53,7 +53,7 @@ from TINY import TEMP
 ds=TEMP()
 
 # Keyword
-bool 		<- ds.exist_disp()
-List		<- ds.get_disp()
-float		<- ds.read_temp(disp)
+bool 		       <- ds.exist_disp()
+List of disp		<- ds.get_disp()
+float		       <- ds.read_temp(disp)
 
