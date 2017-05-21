@@ -24,16 +24,14 @@
   #define Time_off 600000  // millesec - 10 minuti
 // Attivazione delle stampe di controllo TEST=1
   #define Test 0
-// inverte LED se in programmazione (porre a 0 quando installi SWITCH)
+// inverte out TTL LED se in programmazione (porre a 0 quando installi SWITCH)
   #define Prog 0
 // Dati di Connessione al broker locale
   #define Broker_mio "iot.eclipse.org"
   #define Port 1883
 // credenziali per l'access point locale
-  const char* ssid     = "TP-LINK_B1BDFC";
-  const char* pass = "33757858";
-//  const char* ssid     = "Telecom-55159155";
-//  const char* pass = "giovannicupini15101949gc";
+  const char* ssid     = "My_SSID";
+  const char* pass = "My_passwd";
 // creazione dell'oggetto broker mqtt
   const char* mqtt_server = Broker_mio;
 
