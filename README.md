@@ -1,17 +1,11 @@
 # TINY
-python modules to manage the board TINY RTC
 
-TINY.py is a python module to handle all of TINY RTC devices.
-TINY_1.py is e new module width little modify
+Module TINY.py 	: to handle all of  the TINY RTC devices
+Module  Lcd.py	  	: to handle LCD 4x20 
 
-In particular, it manages via I2C:
+test_EPROM.py	: test the EPROM of the TINY RTC
+test_RTC.py			: test the RTC clock/calendar of the TINY RTC
+test_TEMP.py	    : test  the Sensor DS18B20
 
--> RTC Chip DS1307
-
--> The EPROM chip AT24C32
-
-Via OneWire:
-
--> If present the temperature sensor DS18B20
-
--> also it runs DS18B20 sensors without TINY RTC
+Chip_mqtt_01.py			: software python to manage my progect 
+ESP_01_mqtt_010.ino	: software for ESP_8266 to manage my progect
