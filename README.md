@@ -10,7 +10,7 @@ test_RTC.py			    : test the RTC clock/calendar of TINY RTC
 
 test_TEMP.py	      : test the Sensor DS18B20
 
-Prog_ESP_01.pdf     : Electric circuit programing ESP_01
+Prog_ESP_01.pdf     : Electric circuit programming ESP_01
 
 Chip_mqtt_01.py			: software python to manage my progect 
 
